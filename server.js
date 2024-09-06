@@ -10,6 +10,7 @@
 const express = require('express')
 const app = express()
 const db=require('./db');
+require('dotenv').config();
 const person=require('./models/user');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -33,18 +34,18 @@ app.get('/home', function (req, res) {
 app.post('/save', function (req, res) {
     res.send('data saved')
   })
-// app.post('/savePerson', async function (req, res) {
-//    try {
-//     const data=req.body;
-//     const newPerson=new person(data);
-//     const response = await newPerson.save();
-//     res.status(200).json(response)
-//    } catch (error) {
-//     console.log(error)
-//     res.send('error occured')
-//    }
+app.post('/savePerson', async function (req, res) {
+   try {
+    const data=req.body;
+    const newPerson=new person(data);
+    const response = await newPerson.save();
+    res.status(200).json(response)
+   } catch (error) {
+    console.log(error)
+    res.send('error occured')
+   }
     
-// })
+})
 
 // app.get('/person', async function (req, res) {
 //     try {
